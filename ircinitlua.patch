@@ -1,0 +1,4 @@
+31a32,34
+> local SD = modpath.."/socket-lib"
+> ie.package.path = SD.."/?/init.lua;"..SD.."/?.lua;"..ie.package.path
+> ie.package.cpath = SD.."/?/init.dll;"..SD.."/?.dll;"..ie.package.cpath
