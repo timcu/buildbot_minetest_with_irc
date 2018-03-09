@@ -193,17 +193,24 @@ cmake .. \
 mv /usr/bin/sh.exe~ /usr/bin/sh.exe
 mingw32-make package -j$(nproc)
 
-cd _CPack_Packages/win64/ZIP/
-cp /mingw64/bin/libgcc_s_seh-1.dll minetest-*/bin
-cp /mingw64/bin/libstdc++-6.dll minetest-*/bin
-cp /mingw64/bin/libwinpthread-1.dll minetest-*/bin
-cp $libdir/luasocket/src/*.dll minetest-*/bin/
-cp -R $libdir/irc minetest-*/mods/
-patch minetest-*/mods/irc/init.lua $dir/ircinitlua.patch
-cp -R $libdir/luasocket/socket-lib minetest-*/mods/irc/
+cd _CPack_Packages/win64/ZIP/minetest-*/
+cpackdir=`pwd`
+minetestname=`basename $cpackdir`
+bindir="$cpackdir/bin"
+modsdir="$cpackdir/mods"
+cp /mingw64/bin/libgcc_s_seh-1.dll $bindir/
+cp /mingw64/bin/libstdc++-6.dll $bindir/
+cp /mingw64/bin/libwinpthread-1.dll $bindir/
+cp $libdir/luasocket/src/*.dll $bindir/
+cp -R $libdir/irc $modsdir/
+patch $modsdir/irc/init.lua $dir/ircinitlua.patch
+cp -R $libdir/luasocket/socket-lib $modsdir/irc/
+# Following line only required for builds of minetest releases earlier than 19-Jul-2017 which includes 0.4.16
+[ -e $bindir/lua51.dll ] || cp $libdir/luajit/src/lua51.dll $bindir/
 
-zip -ur minetest-*.zip minetest-*
-cp minetest-*.zip ../../../
+cd $cpackdir/..
+zip -ur $minetestname.zip $minetestname
+cp $minetestname.zip ../../../
 
 echo -n "End of compilation: "; date -R
 
