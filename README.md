@@ -15,7 +15,7 @@ Additional requirements. Install "patch" using pacman in msys2.
 ```
 pacman -S patch
 ```
-Install and run script in msys2
+Install and run this script in msys2
 ```
 git clone https://github.com/timcu/buildbot_minetest_with_irc.git
 cd buildbot_minetest_with_irc
@@ -23,7 +23,7 @@ cd buildbot_minetest_with_irc
 ```
 The minetest package will be located in 
 ```
-../minetest_with_irc/minetest/_build/_CPack_Packages/win64/ZIP/
+../minetest_with_irc/minetest/_build/
 ```
 and will have a name like `minetest-0.5.0-6cfd699b-irc-win64.zip`
 
